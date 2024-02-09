@@ -1,0 +1,3 @@
+plaintext="Hello, world!"
+key="YourSecretKeyHere"
+echo -n "$plaintext" | openssl enc -aes-128-cbc -e -K $(echo -n "$key" | xxd -p) -iv 0 | xxd -p -c 256
