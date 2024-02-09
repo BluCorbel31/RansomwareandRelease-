@@ -1,0 +1,3 @@
+encrypted="YourEncryptedMessageHere"
+key="YourSecretKeyHere"
+echo -n "$encrypted" | xxd -r -p | openssl enc -aes-128-cbc -d -K $(echo -n "$key" | xxd -p) -iv 0
