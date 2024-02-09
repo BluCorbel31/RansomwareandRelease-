@@ -1,0 +1,3 @@
+set plaintext="Hello, world!"
+set key=YourSecretKeyHere
+echo %plaintext% | openssl enc -aes-128-cbc -e -K %key% -iv 0 | openssl enc -base64
