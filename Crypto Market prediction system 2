@@ -1,0 +1,86 @@
+import yfinance as yf
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+
+def get_crypto_data(symbols, start_date, end_date):
+    """
+    Retrieves historical cryptocurrency data from Yahoo Finance API for multiple symbols.
+    """
+    try:
+        crypto_data = {}
+        for symbol in symbols:
+            crypto_data[symbol] = yf.download(symbol, start=start_date, end=end_date)
+        return crypto_data
+    except Exception as e:
+        print("Error fetching cryptocurrency data:", e)
+        return None
+
+def prepare_data(crypto_data):
+    """
+    Prepares data for training a machine learning model.
+    """
+    try:
+        X = {}
+        y = {}
+        for symbol, data in crypto_data.items():
+            # Use index as feature
+            X[symbol] = np.arange(len(data)).reshape(-1, 1)
+            # Predict closing price
+            y[symbol] = data['Close'].values
+        return X, y
+    except Exception as e:
+        print("Error preparing data:", e)
+        return None, None
+
+def train_model(X, y):
+    """
+    Trains a linear regression model.
+    """
+    try:
+        models = {}
+        X_test = {}
+        y_test = {}
+        for symbol in X.keys():
+            # Split data into training and testing sets
+            X_train, X_test[symbol], y_train, y_test[symbol] = train_test_split(X[symbol], y[symbol], test_size=0.2, random_state=42)
+            # Train the model
+            models[symbol] = LinearRegression()
+            models[symbol].fit(X_train, y_train)
+        return models, X_test, y_test
+    except Exception as e:
+        print("Error training model:", e)
+        return None, None, None
+
+def main():
+    # Define cryptocurrency symbols, start date, and end date
+    symbols = ['BTC-USD', 'ETH-USD', 'XRP-USD']  # Example: Bitcoin, Ethereum, Ripple
+    start_date = '2023-01-01'
+    end_date = '2024-01-01'
+
+    # Retrieve cryptocurrency data
+    crypto_data = get_crypto_data(symbols, start_date, end_date)
+    
+    if crypto_data is not None:
+        # Prepare data
+        X, y = prepare_data(crypto_data)
+        
+        if X is not None and y is not None:
+            # Train model
+            models, X_test, y_test = train_model(X, y)
+            
+            if models is not None:
+                for symbol, model in models.items():
+                    # Make predictions
+                    predictions = model.predict(X_test[symbol])
+                    print(f"Predictions for {symbol}:", predictions)
+                    # Additional analysis or evaluation can be implemented here
+            else:
+                print("Model training failed.")
+        else:
+            print("Data preparation failed.")
+    else:
+        print("No data retrieved. Please check your inputs.")
+
+if __name__ == "__main__":
+    main()
