@@ -1,0 +1,48 @@
+import yfinance as yf
+
+def get_crypto_data(symbol, start_date, end_date):
+    """
+    Retrieves historical cryptocurrency data from Yahoo Finance API.
+    """
+    try:
+        # Fetch cryptocurrency data
+        crypto_data = yf.download(symbol, start=start_date, end=end_date)
+        return crypto_data
+    except Exception as e:
+        print("Error fetching cryptocurrency data:", e)
+        return None
+
+def calculate_returns(crypto_data):
+    """
+    Calculates returns from historical cryptocurrency data.
+    """
+    try:
+        # Calculate returns
+        crypto_data['Daily_Return'] = crypto_data['Adj Close'].pct_change()
+        return crypto_data
+    except Exception as e:
+        print("Error calculating returns:", e)
+        return None
+
+def main():
+    # Define cryptocurrency symbol, start date, and end date
+    symbol = 'BTC-USD'  # Example: Bitcoin
+    start_date = '2023-01-01'
+    end_date = '2024-01-01'
+
+    # Retrieve cryptocurrency data
+    crypto_data = get_crypto_data(symbol, start_date, end_date)
+    
+    if crypto_data is not None:
+        # Calculate returns
+        crypto_data_with_returns = calculate_returns(crypto_data)
+        
+        if crypto_data_with_returns is not None:
+            # Display the data
+            print(crypto_data_with_returns.head())
+            # Additional analysis or investment strategies can be implemented here
+    else:
+        print("No data retrieved. Please check your inputs.")
+
+if __name__ == "__main__":
+    main()
