@@ -1,4 +1,5 @@
-Welcome to labyrinth. Please follow the instructions carefully. This system can be implemented by a junior as long as they now their stuff if the don't please reference this video before using. The skills taught by NetworkChuck are transferable due to coding language. Pay attention at the bit where voldemort.py and decryption.py have their parameters set.
+Welcome to labyrinth. We now have an automated encryption and decryption for ease of use.
+Please follow the instructions carefully. This system can be implemented by a junior as long as they now their stuff if the don't please reference this video before using. The skills taught by NetworkChuck are transferable due to coding language. Pay attention at the bit where voldemort.py and decryption.py have their parameters set.
 
 https://youtu.be/UtMMjXOlRQc?si=IhXi0ZUh2jdlwUYh
 
