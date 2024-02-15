@@ -1,1 +1,1 @@
-Please note that the execute_sql function is a placeholder and needs to be implemented based on your actual SQL execution requirements, such as connecting to a database and executing queries.
+Please note that the execute_sql function is a placeholder and needs to be implemented based on your actual SQL execution requirements, such as connecting to a database and executing queries. Also have visual studio tools installed if you're using this and if you don't when you have rustup that's something I didn't know could happen get in touch your a cool person.
