@@ -1,0 +1,1 @@
+This is a functional version of my automated encryption and decryption with snowflake memory backup for all encrypted files so that if someone double encrypts them, during the initial encryption a copy of the files and directories are added to the snowflake memory bank.
