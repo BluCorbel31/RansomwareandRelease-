@@ -1,4 +1,4 @@
-Labyrinth, Multi Compiler and Barrier Breaker all versions.
+Labyrinth, Multi Compiler, Barrier Breaker and RepoHouse all versions.
 AGPL-3.0-or-later                  GNU AFFERO GENERAL PUBLIC LICENSE
                        Version 3, 19 November 2007
 
