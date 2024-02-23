@@ -1,0 +1,1 @@
+This is a prototype system for WordPress hopefully to become a plugin.
