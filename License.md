@@ -1,4 +1,4 @@
-Labyrinth, Multi Compiler, Barrier Breaker and RepoHouse, TMHP Blockchain and Dragons Lair all versions.
+Labyrinth, Multi Compiler, Barrier Breaker and RepoHouse, TMHP Blockchain, Dragons Lair and Kubecloud all versions.
 AGPL-3.0-or-later                  GNU AFFERO GENERAL PUBLIC LICENSE
                        Version 3, 19 November 2007
 
