@@ -1,0 +1,187 @@
+cargo build --release
+
+[dependencies]
+actix-web = "3"
+serde = { version = "1", features = ["derive"] }
+bcrypt = "0.9"
+futures = "0.3"
+actix-multipart = "0.3"
+
+use actix_web::{web, App, HttpServer, Responder, HttpResponse, Error};
+use serde::{Deserialize, Serialize};
+use bcrypt::{hash, verify, DEFAULT_COST};
+use std::collections::{HashMap, HashSet};
+use actix_multipart::Multipart;
+use futures::{StreamExt, TryStreamExt};
+use actix_web_actors::ws;
+
+#[derive(Debug, Serialize, Deserialize, Clone)]
+struct User {
+    email: String,
+    password: String,
+    profile_picture: Option<String>, // URL or path to profile picture
+    // Add additional profile fields here
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+struct RegistrationRequest {
+    email: String,
+    password: String,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+struct Contact {
+    email: String,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+struct Group {
+    name: String,
+    members: HashSet<String>,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+struct Message {
+    sender: String,
+    recipient: String,
+    content: String,
+    // Add encryption-related fields here
+}
+
+// In-memory storage for registered users, contacts, groups, and messages (replace with database in production)
+struct AppState {
+    users: Vec<User>,
+    contacts: HashMap<String, HashSet<String>>, // User email -> Set of contact emails
+    groups: HashMap<String, Group>, // Group name -> Group
+    messages: Vec<Message>,
+    files: HashMap<String, Vec<u8>>, // File ID -> File content
+}
+
+async fn register(req: web::Json<RegistrationRequest>, state: web::Data<AppState>) -> impl Responder {
+    let hashed_password = hash(&req.password, DEFAULT_COST).unwrap();
+    let user = User { email: req.email.clone(), password: hashed_password, profile_picture: None };
+    state.users.push(user.clone());
+    HttpResponse::Ok().json(user)
+}
+
+async fn add_contact(req: web::Json<Contact>, state: web::Data<AppState>) -> impl Responder {
+    let contacts = state.contacts.entry(req.email.clone()).or_insert(HashSet::new());
+    contacts.insert(req.email.clone());
+    HttpResponse::Ok().json(req)
+}
+
+async fn create_group(req: web::Json<Group>, state: web::Data<AppState>) -> impl Responder {
+    let group_name = req.name.clone();
+    state.groups.insert(group_name.clone(), req.clone());
+    HttpResponse::Ok().json(req)
+}
+
+async fn send_message(req: web::Json<Message>, state: web::Data<AppState>) -> impl Responder {
+    state.messages.push(req.clone());
+    HttpResponse::Ok().json(req)
+}
+
+async fn upload_profile_picture(mut payload: Multipart) -> impl Responder {
+    // Process multipart/form-data payload for profile picture upload
+    // Save the file securely and update the user's profile with the URL or path
+    // Return the URL or path to the uploaded profile picture
+    HttpResponse::Ok().body("Profile picture uploaded successfully")
+}
+
+async fn upload_file(mut payload: Multipart, state: web::Data<AppState>) -> impl Responder {
+    // Process multipart/form-data payload for file upload
+    while let Some(field) = payload.try_next().await.unwrap() {
+        let content_disposition = field.content_disposition().unwrap();
+        let filename = content_disposition.get_filename().unwrap().to_owned();
+        let mut bytes = Vec::new();
+
+        // Read the file content into bytes
+        while let Some(chunk) = field.next().await {
+            let data = chunk.unwrap();
+            bytes.extend_from_slice(&data);
+        }
+
+        // Generate a unique file ID (replace with actual file ID generation logic)
+        let file_id = "unique_file_id".to_string();
+        
+        // Store the file content in the application state (replace with secure file storage mechanism)
+        state.files.insert(file_id.clone(), bytes);
+
+        // Return the file ID
+        return HttpResponse::Ok().body(file_id);
+    }
+
+    HttpResponse::BadRequest().body("Failed to upload file")
+}
+
+async fn download_file(state: web::Data<AppState>, info: web::Path<(String,)>) -> impl Responder {
+    let file_id = &info.0;
+
+    if let Some(file_content) = state.files.get(file_id) {
+        HttpResponse::Ok()
+            .header("Content-Type", "application/octet-stream")
+            .body(file_content.clone())
+    } else {
+        HttpResponse::NotFound().body("File not found")
+    }
+}
+
+async fn user_profile(req: web::HttpRequest, state: web::Data<AppState>) -> impl Responder {
+    let email = req.match_info().get("email").unwrap(); // Get email from request path
+    let user = state.users.iter().find(|u| u.email == email);
+    match user {
+        Some(user) => HttpResponse::Ok().json(user),
+        None => HttpResponse::NotFound().body("User not found")
+    }
+}
+
+async fn ws_message(req: web::HttpRequest, stream: web::Payload) -> Result<HttpResponse, actix_web::Error> {
+    ws::start(WebsocketSession { clients: HashMap::new() }, &req, stream)
+}
+
+struct WebsocketSession {
+    clients: HashMap<String, ws::WebsocketContext<WebsocketSession>>,
+}
+
+impl Actor for WebsocketSession {
+    type Context = ws::WebsocketContext<Self>;
+}
+
+impl StreamHandler<Result<ws::Message, ws::ProtocolError>> for WebsocketSession {
+    fn handle(&mut self, msg: Result<ws::Message, ws::ProtocolError>, ctx: &mut Self::Context) {
+        match msg {
+            Ok(ws::Message::Text(text)) => {
+                // Handle incoming text message
+            }
+            _ => (),
+        }
+    }
+}
+
+#[actix_web::main]
+async fn main() -> std::io::Result<()> {
+    let app_state = web::Data::new(AppState {
+        users: Vec::new(),
+        contacts: HashMap::new(),
+        groups: HashMap::new(),
+        messages: Vec::new(),
+        files: HashMap::new(),
+    });
+
+    HttpServer::new(move || {
+        App::new()
+            .app_data(app_state.clone())
+            .route("/register", web::post().to(register))
+            .route("/add_contact", web::post().to(add_contact))
+            .route("/create_group", web::post().to(create_group))
+            .route("/send_message", web::post().to(send_message))
+            .route("/upload_profile_picture", web::post().to(upload_profile_picture))
+            .route("/upload_file", web::post().to(upload_file))
+            .route("/download_file/{file_id}", web::get().to(download_file))
+            .route("/user_profile/{email}", web::get().to(user_profile))
+            .route("/ws/", web::get().to(ws_message))
+    })
+    .bind("127.0.0.1:8080")?
+    .run()
+    .await
+}
