@@ -1,0 +1,5 @@
+[dependencies]
+gtk = "0.9.1"
+#!Bash
+Once you have added your extras to both, make it a Cargo.toml load then.
+cargo run --bin CyberWarrior.rs
