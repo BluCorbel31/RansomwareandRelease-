@@ -1,5 +1,7 @@
 [dependencies]
 gtk = "0.9.1"
-#!Bash
 Once you have added your extras to both, make it a Cargo.toml load then.
+Please this tool is only as good as your knowledge if you think this is a good fit give it to your red team to sort out.
+#!
+bash
 cargo run --bin CyberWarrior.rs
