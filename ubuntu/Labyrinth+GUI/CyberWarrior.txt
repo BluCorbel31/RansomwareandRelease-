@@ -5,3 +5,7 @@ Please this tool is only as good as your knowledge if you think this is a good f
 #!
 bash
 cargo run --bin CyberWarrior.rs
+Instructions for use.
+Make sure you have all the necessities required like rustup, attack vectors etc first then assemble in this order for use.
+CyberWarrior back and front end
+Then use neural network to input all your tools in this order 
