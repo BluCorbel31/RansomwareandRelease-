@@ -6,6 +6,6 @@ Please this tool is only as good as your knowledge if you think this is a good f
 bash
 cargo run --bin CyberWarrior.rs
 Instructions for use.
-Make sure you have all the necessities required like rustup, attack vectors etc first then assemble in this order for use.
+Make sure you have all the necessities required like rustup, attack vectors, file paths, IPs and various different inputs that need changed to design your cyber warriors arsenal first then assemble in this order for use.
 CyberWarrior back and front end
-Then use ultra link to input all your tools in this order Prophet,threat intelligence gathering, Malware detection unit, Prevalence, 
+Then use ultra link to input all your tools in this order Prophet,threat intelligence gathering, Malware detection unit, Prevalence, Scanner and IDS, Battle suit, 
