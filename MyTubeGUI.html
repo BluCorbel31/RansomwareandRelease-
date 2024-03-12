@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyTube</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to MyTube</h1>
+        <form id="uploadForm" enctype="multipart/form-data">
+            <input type="file" name="video" id="videoFile" accept="video/*">
+            <button type="submit">Upload Video</button>
+        </form>
+        <div id="videoList"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
