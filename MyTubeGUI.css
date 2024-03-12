@@ -1,0 +1,15 @@
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+input[type="file"] {
+    margin-bottom: 10px;
+}
+
+#videoList {
+    margin-top: 20px;
+    text-align: left;
+}
