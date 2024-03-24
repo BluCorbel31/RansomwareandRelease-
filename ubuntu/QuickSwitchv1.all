@@ -1,4 +1,4 @@
-Of course! Here's a compilation of all the scripts from our conversation that have a recommended pair with a system or tool, regardless of how that pairing occurs:
+QuickSwitchv1:
 
 1. **Bash (Linux/macOS) with Snort IDS** - quick_switch_snort.sh
 ```bash
@@ -166,4 +166,4 @@ Write-Host "Task completed successfully."
 Write-Host "Created by Blu Corbel."
 ```
 
-These scripts can be paired with various systems or tools for network security or management. Let me know if you need further assistance!
+These scripts can be paired with various systems or tools for network security or management.
