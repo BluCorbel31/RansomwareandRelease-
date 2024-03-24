@@ -1,0 +1,38 @@
+Instructions:
+
+1. **Snort IDS**:
+   - Install Snort on your system according to the instructions provided on the Snort website.
+   - Configure Snort to monitor the network interfaces where you want to detect intrusions.
+   - Start Snort service to begin monitoring network traffic.
+   - Run the provided script (e.g., quick_switch_snort.sh) on your system to perform IP configuration tasks and DNS cache flushing.
+
+2. **Suricata IDS**:
+   - Install Suricata on your system following the installation instructions provided on the Suricata website.
+   - Configure Suricata to monitor the network interfaces and traffic you want to analyze for intrusions.
+   - Start the Suricata service to begin monitoring network traffic.
+   - Execute the provided script (e.g., quick_switch_suricata.py) on your system to perform IP configuration tasks and DNS cache flushing.
+
+3. **Windows Firewall**:
+   - Open the "Windows Defender Firewall with Advanced Security" utility on your Windows system.
+   - Configure inbound and outbound rules as needed to allow or block specific types of traffic.
+   - Run the provided script (e.g., quick_switch_windows_firewall.ps1) on your Windows system to perform IP configuration tasks and DNS cache flushing.
+
+4. **Windows Defender**:
+   - Open the "Windows Security" app on your Windows system.
+   - Navigate to the "Virus & threat protection" section and ensure that Windows Defender is enabled.
+   - Configure Windows Defender settings as needed for antivirus and network security.
+   - Execute the provided script (e.g., quick_switch_windows_defender.ps1) on your Windows system to perform IP configuration tasks and DNS cache flushing.
+
+5. **iptables (Linux)**:
+   - Open a terminal on your Linux system.
+   - Use the iptables command to configure firewall rules for packet filtering and NAT.
+   - Save the iptables configuration to persist across reboots if necessary.
+   - Run the provided script (e.g., quick_switch_iptables.py) on your Linux system to perform IP configuration tasks and DNS cache flushing.
+
+6. **ufw (Linux)**:
+   - Open a terminal on your Ubuntu or Debian-based Linux system.
+   - Use the ufw command to manage firewall rules and enable/disable the firewall.
+   - Configure ufw rules as needed to allow or block specific types of traffic.
+   - Execute the provided script (e.g., quick_switch_ufw.sh) on your Linux system to perform IP configuration tasks and DNS cache flushing.
+
+These instructions provide a basic overview of how to pair the provided scripts with each tool or system.
