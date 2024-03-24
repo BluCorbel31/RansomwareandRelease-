@@ -1,0 +1,169 @@
+Of course! Here's a compilation of all the scripts from our conversation that have a recommended pair with a system or tool, regardless of how that pairing occurs:
+
+1. **Bash (Linux/macOS) with Snort IDS** - quick_switch_snort.sh
+```bash
+#!/bin/bash
+
+# Quick Switch v1
+# Compatible with IDS: Snort
+
+echo "Executing IP configuration commands..."
+sudo ipconfig /release
+sudo ipconfig /release6
+sudo ipconfig /renew
+sudo ipconfig /renew6
+sudo systemctl restart network-manager
+sudo systemd-resolve --flush-caches
+echo "Task completed successfully."
+
+echo "Created by Blu Corbel."
+```
+
+2. **Python with Suricata IDS** - quick_switch_suricata.py
+```python
+# Quick Switch v1
+# Compatible with IDS: Suricata
+
+import os
+
+print("Executing IP configuration commands...")
+os.system("ipconfig /release")
+os.system("ipconfig /release6")
+os.system("ipconfig /renew")
+os.system("ipconfig /renew6")
+os.system("ipconfig /flushdns")
+print("Task completed successfully.")
+
+# Footer
+print("Created by Blu Corbel.")
+```
+
+3. **Ruby with Snort IDS** - quick_switch_snort.rb
+```ruby
+# Quick Switch v1
+# Compatible with IDS: Snort
+
+puts "Executing IP configuration commands..."
+system("ipconfig /release")
+system("ipconfig /release6")
+system("ipconfig /renew")
+system("ipconfig /renew6")
+system("ipconfig /flushdns")
+puts "Task completed successfully."
+
+# Footer
+puts "Created by Blu Corbel."
+```
+
+4. **Rust with Suricata IDS** - quick_switch_suricata.rs
+```rust
+// Quick Switch v1
+// Compatible with IDS: Suricata
+
+use std::process::Command;
+
+fn main() {
+    println!("Executing IP configuration commands...");
+    Command::new("ipconfig").arg("/release").status().expect("Failed to execute ipconfig /release");
+    Command::new("ipconfig").arg("/release6").status().expect("Failed to execute ipconfig /release6");
+    Command::new("ipconfig").arg("/renew").status().expect("Failed to execute ipconfig /renew");
+    Command::new("ipconfig").arg("/renew6").status().expect("Failed to execute ipconfig /renew6");
+    Command::new("ipconfig").arg("/flushdns").status().expect("Failed to execute ipconfig /flushdns");
+    println!("Task completed successfully.");
+    
+    // Footer
+    println!("Created by Blu Corbel.");
+}
+```
+
+5. **PowerShell with Windows Firewall** - quick_switch_windows_firewall.ps1
+```powershell
+# Quick Switch v1
+# Compatible with Windows Firewall for network security
+
+Write-Host "Executing IP configuration commands..."
+ipconfig /release
+ipconfig /release6
+ipconfig /renew
+ipconfig /renew6
+Clear-DnsClientCache
+Write-Host "Task completed successfully."
+
+# Footer
+Write-Host "Created by Blu Corbel."
+```
+
+6. **Batch with Windows Defender Firewall** - quick_switch_windows_defender_firewall.bat
+```batch
+@echo off
+REM Quick Switch v1
+REM Compatible with Windows Defender Firewall for network security
+
+echo Executing IP configuration commands...
+ipconfig /release
+ipconfig /release6
+ipconfig /renew
+ipconfig /renew6
+ipconfig /flushdns
+echo Task completed successfully.
+
+REM Footer
+echo Created by Blu Corbel.
+```
+
+7. **Python with iptables (Linux)** - quick_switch_iptables.py
+```python
+# Quick Switch v1
+# Compatible with iptables for firewall management (Linux)
+
+import os
+
+print("Executing IP configuration commands...")
+os.system("ipconfig /release")
+os.system("ipconfig /release6")
+os.system("ipconfig /renew")
+os.system("ipconfig /renew6")
+os.system("ipconfig /flushdns")
+print("Task completed successfully.")
+
+# Footer
+print("Created by Blu Corbel.")
+```
+
+8. **Bash with ufw (Linux)** - quick_switch_ufw.sh
+```bash
+#!/bin/bash
+
+# Quick Switch v1
+# Compatible with ufw for firewall management (Linux)
+
+echo "Executing IP configuration commands..."
+sudo ipconfig /release
+sudo ipconfig /release6
+sudo ipconfig /renew
+sudo ipconfig /renew6
+sudo systemctl restart network-manager
+sudo systemd-resolve --flush-caches
+echo "Task completed successfully."
+
+echo "Created by Blu Corbel."
+```
+
+9. **PowerShell with Windows Defender (Windows)** - quick_switch_windows_defender.ps1
+```powershell
+# Quick Switch v1
+# Compatible with Windows Defender for antivirus and network security
+
+Write-Host "Executing IP configuration commands..."
+ipconfig /release
+ipconfig /release6
+ipconfig /renew
+ipconfig /renew6
+Clear-DnsClientCache
+Write-Host "Task completed successfully."
+
+# Footer
+Write-Host "Created by Blu Corbel."
+```
+
+These scripts can be paired with various systems or tools for network security or management. Let me know if you need further assistance!
